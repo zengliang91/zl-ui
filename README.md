@@ -10,10 +10,12 @@ import Vue from 'vue'
 Vue.use(zlUI)            
 
 2、具体页面进行调用            
-<template>  
-    <zl-tree :data="data"></zl-tree>       
-</template> 
-<script>               
+<temp          
+    <zl-tree :data="data"/zl-tree>    
+    github自动替换关键字，展示不全，请自行补充尖括号        
+/temp>
+<script>   
+ 
     data() {  
         return {  
             data: [
