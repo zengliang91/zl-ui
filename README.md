@@ -61,13 +61,13 @@ Vue.use(zlUI)
 </script>
 
 可选属性：
-nodeKey: string类型，关键字，与expandArray, checkedArray 配合使用进行默认展开与勾选，示例: id,
-expandArray: 数组，默认展开节点，传入默认展开节点中关键字（nodeKey）对应值，示例['1', '2', '2-2'],
-checkedArray: 数组，默认勾选节点，传入默认勾选节点中关键字（nodeKey）对应值，示例['1', '1-2', '2-2'],
-isCheckChild: Boolean, 父子是否关联，默认true,
-showCheck: Boolean, 是否展示勾选框,默认true，
+nodeKey: string类型，关键字，与expandArray, checkedArray 配合使用进行默认展开与勾选，示例: id。   
+expandArray: 数组，默认展开节点，传入默认展开节点中关键字（nodeKey）对应值，示例['1', '2', '2-2']。   
+checkedArray: 数组，默认勾选节点，传入默认勾选节点中关键字（nodeKey）对应值，示例['1', '1-2', '2-2']。   
+isCheckChild: Boolean, 父子是否关联，默认true。   
+showCheck: Boolean, 是否展示勾选框,默认true。   
 
 可选方法：
-getAllCheckNodes(): 返回所有勾选状态数据
-getHalfCheckNodes(): 返回所有半勾选状态数据
+getAllCheckNodes(): 返回所有勾选状态数据。  
+getHalfCheckNodes(): 返回所有半勾选状态数据。  
 
