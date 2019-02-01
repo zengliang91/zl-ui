@@ -10,7 +10,9 @@ import Vue from 'vue'
 Vue.use(zlUI)            
 
 2、具体页面进行调用      
---树形插件              
+--树形插件     
+
+
           <template>          
          <zl-tree ref="zlTree" :data="treeData" nodeKey="id" :isCheckChild="true" :checkedArray="checkedArray" :expandArray="expandArray"      @nodeClick="nodeClick" @expandTree="expandTree"></zl-tree>      
          </template>   
@@ -186,14 +188,18 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
 
 
 ----树形表格插件      
-改插件依赖vue element-ui插件，应先引用element-ui再引用该插件，否则报错     
+改插件依赖vue element-ui插件，应先引用element-ui再引用该插件，否则报错  
+
       <template>
+          
      <div>
       <div>
         <tree-table :data="regionData" :columns="columns" border @cellClick="cellClick" @linkCellClick="linkCellClick" @editData="editData" @addChild="addChild" @removeData="removeData"></tree-table>
       </div>
      </div>
     </template>
+    
+    
      <script>
     export default {
         name: 'treeTable',
