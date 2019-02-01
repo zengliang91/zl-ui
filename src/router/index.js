@@ -16,9 +16,14 @@ export const router = new Router({
           component: () => import('@/view/home/index')
         },
         {
-          path: '/test',
-          name: 'test',
-          component: () => import('@/view/home/test')
+          path: '/tree',
+          name: 'tree',
+          component: () => import('@/view/home/tree')
+        },
+        {
+          path: '/msg',
+          name: 'msg',
+          component: () => import('@/view/home/message')
         }
       ]
     },

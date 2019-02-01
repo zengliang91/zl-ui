@@ -1,168 +1,71 @@
 <template>
 <div>
-    <div >
-       <span @click="message">123</span>
-       <div style=" width: 400px;max-height: 600px;overflow:auto;background: #e7e7e7;">
-         <zl-tree ref="zlTree" :data="treeData" nodeKey="id" :isCheckChild="true" :checkedArray="checkedArray" :expandArray="expandArray" @nodeClick="nodeClick" @expandTree="expandTree"></zl-tree>
-       </div>
-       <span @click="checkAll">button</span>
-    </div>
     <div>
-
+        <tree-table :data="regionData" :columns="columns" border @cellClick="cellClick" @linkCellClick="linkCellClick" @editData="editData" @addChild="addChild" @removeData="removeData"></tree-table>
     </div>
 </div>
 </template>
 <script>
     export default {
+        name: 'treeTable',
         data() {
             return {
-                data: {
-                    name: 'zl'
-                },
-                expandArray: ['1', '1-1', '1-2'],
-                checkedArray: ['1-1'],
-                treeData: [
+                columns: [
                     {
-                        id: '1', 
-                        label: '节点1', 
-                        children: [
-                            {
-                                id: '1-1', 
-                                label: '节点1-1', 
-                                children: [
-                                    {
-                                        id: '1-1-1', 
-                                        label: '节点1-1-1', 
-                                        children: [
-                                            {
-                                                id: '1-1-1-1', 
-                                                label: '节点1-1-1-1', 
-                                                children: [
-                                                    {
-                                                        id: '1-1-1-1-1', 
-                                                        label: '节点1-1-1-1-1', 
-                                                    },
-                                                    {
-                                                        id: '1-1-1-1-2', 
-                                                        label: '节点1-1-1-1-2', 
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                id: '1-1-1-2', 
-                                                label: '节点1-1-1-2', 
-                                            }
-                                        ]
-                                    },
-                                    {
-                                         id: '1-1-2', 
-                                         label: '节点1-1-2', 
-                                    }
-                                ]
-                            },
-                            {
-                                id: '1-2', 
-                                label: '节点1-2', 
-                                children: [
-                                    {
-                                         id: '1-2-1', 
-                                         label: '节点1-2-1', 
-                                    },
-                                    {
-                                         id: '1-2-2', 
-                                         label: '节点1-2-2', 
-                                    },
-                                    {
-                                         id: '1-2-3', 
-                                         label: '节点1-2-3', 
-                                    }
-                                ]
-                            }
-                        ]
+                        text: "区域名称",
+                        value: "name",
+                        width: 260,
+                        type: 'link',
+                        callback: 'linkCellClick',
+                        cellClass: 'link-cell'
                     },
                     {
-                        id: '2', 
-                        label: '节点2', 
-                        children: [
-                            {
-                                id: '2-1', 
-                                label: '节点2-1', 
-                                children: [
-                                    {
-                                         id: '2-1-1', 
-                                         label: '节点2-1-1', 
-                                    },
-                                    {
-                                         id: '2-1-2', 
-                                         label: '节点2-1-2', 
-                                    },
-                                    {
-                                         id: '2-1-3', 
-                                         label: '节点2-1-3', 
-                                    },
-                                    {
-                                         id: '2-1-4', 
-                                         label: '节点2-1-2', 
-                                    }
-                                ]
-                            },
-                            {
-                                id: '2-2', 
-                                label: '节点2-2', 
-                                children: [
-                                    {
-                                         id: '2-2-1', 
-                                         label: '节点2-2-1', 
-                                    },
-                                    {
-                                         id: '2-2-2', 
-                                         label: '节点2-2-2', 
-                                    },
-                                    {
-                                         id: '2-2-3', 
-                                         label: '节点2-2-3', 
-                                    }
-                                ]
-                            }
-                        ]
+                        text: "区域编码",
+                        value: "code",
+                        width: 120,
+                        type: 'link',
+                        callback: 'cellClick'
                     },
                     {
-                        id: '3', 
-                        label: '节点3', 
-                        children: []
+                        text: "备注",
+                        value: "remark",
+                        rowClass: 'test'
                     },
                     {
-                        id: '4', 
-                        label: '节点4', 
-                        children: [
-                            {
-                                    id: '4-1', 
-                                    label: '节点4-1', 
-                            }
-                        ]
+                        text: "操作",
+                        type: 'icon',
+                        value: ['修改', '添加下级', '删除'],
+                        callback: ['editData', 'addChild', 'removeData'],
+                        width: 200,
+                        cellClass: 'link-cell'
                     }
-                ]
+                ],
+                regionData: [
+                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, children: [
+                        {name: 'name2', code: '10002', remark: '备注2'},
+                        {name: 'name3', code: '10003', remark: '备注3'}
+                    ]}
+                ],
+                
             }
         },
         methods: {
-            message() {
-                this.$msg({
-                    type: 'success',
-                    message: '111'
-                }, (e) => {
-                    console.log(e)
-                })
+            
+            linkCellClick() {
+                console.log(111)
             },
-            checkAll() {
-                let data = this.$refs.zlTree.getHalfCheckNodes()
+            removeData(data) {
+                console.log(data,'remove')
+            },
+            addChild(data) {
+                console.log(data,'add')
+            },
+            editData(data) {
+                console.log(data,'edit')
+            },
+            cellClick(data) {
                 console.log(data)
-            },
-            nodeClick(data) {
-                console.log(data)
-            },
-            expandTree(isExpand) {//节点展开回调事件
-               console.log(isExpand)
-            },
+            }
         },
     }
 </script>

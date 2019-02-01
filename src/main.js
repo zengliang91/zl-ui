@@ -3,8 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import {router} from './router'
-
+import elementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 import zlUi from '../package/index'
+Vue.use(elementUI)
 Vue.use(zlUi)
 
 Vue.config.productionTip = false

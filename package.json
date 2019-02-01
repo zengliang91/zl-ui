@@ -1,6 +1,6 @@
 {
   "name": "zengliang-ui",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "自定义组件",
   "main": "dist/zlUi.min.js",
   "author": "zengliang ",
@@ -16,6 +16,7 @@
     "package": "webpack --display-error-details --config build/webpack.config.js"
   },
   "dependencies": {
+    "element-ui": "^2.5.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "zengliang-ui": "^1.0.1"
