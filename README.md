@@ -11,57 +11,166 @@ Vue.use(zlUI)
 
 2、具体页面进行调用      
 --树形插件              
-<temp          
-    <zl-tree :data="data"/zl-tree>    
-    github自动替换关键字，展示不全，请自行补充尖括号        
-/temp>        
-<script>              
-       
-    data() {           
-        return {        
-            data: [            
-                {
-                    id: '1',   
-                    label: '节点1',   
-                    children: [   
-                        {   
-                             id: '1-1',   
-                             label: '节点1-1'   
-                        },   
-                        {   
-                             id: '1-2',   
-                             label: '节点1-2'  
-                        }  
-                    ]  
-                },  
-                {
-                    id: '2',
-                    label: '节点2',
-                    children: [
-                        {
-                             id: '2-1',
-                             label: '节点2-1'
-                        },
-                        {
-                            id: '2-2',
-                            label: '节点2-2',
-                            children: [
-                                {
-                                    id: '2-2-1',
-                                    label: '节点2-2-1'
-                                },
-                                {
-                                    id: '2-2-2',
-                                    label: '节点2-2-2'
-                                }
-                            ]
-                        }
-                    ]
+          <template>          
+         <zl-tree ref="zlTree" :data="treeData" nodeKey="id" :isCheckChild="true" :checkedArray="checkedArray" :expandArray="expandArray"      @nodeClick="nodeClick" @expandTree="expandTree"></zl-tree>      
+         </template>   
+    
+    <script>                    
+    export default {          
+        name: 'tree',        
+        data() {        
+            return {         
+                data: {        
+                    name: 'zl'
                 },
-            ]               
-        }             
-    }               
-</script>             
+                expandArray: ['1', '1-1', '1-2'],       
+                checkedArray: ['1-1'],          
+                treeData: [         
+                    {          
+                        id: '1', 
+                        label: '节点1', 
+                        children: [
+                            {
+                                id: '1-1', 
+                                label: '节点1-1', 
+                                children: [
+                                    {
+                                        id: '1-1-1', 
+                                        label: '节点1-1-1', 
+                                        children: [
+                                            {
+                                                id: '1-1-1-1', 
+                                                label: '节点1-1-1-1', 
+                                                children: [
+                                                    {
+                                                        id: '1-1-1-1-1', 
+                                                        label: '节点1-1-1-1-1', 
+                                                    },
+                                                    {
+                                                        id: '1-1-1-1-2', 
+                                                        label: '节点1-1-1-1-2', 
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                id: '1-1-1-2', 
+                                                label: '节点1-1-1-2', 
+                                            }
+                                        ]
+                                    },
+                                    {
+                                         id: '1-1-2', 
+                                         label: '节点1-1-2', 
+                                    }
+                                ]
+                            },
+                            {
+                                id: '1-2', 
+                                label: '节点1-2', 
+                                children: [
+                                    {
+                                         id: '1-2-1', 
+                                         label: '节点1-2-1', 
+                                    },
+                                    {
+                                         id: '1-2-2', 
+                                         label: '节点1-2-2', 
+                                    },
+                                    {
+                                         id: '1-2-3', 
+                                         label: '节点1-2-3', 
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id: '2', 
+                        label: '节点2', 
+                        children: [
+                            {
+                                id: '2-1', 
+                                label: '节点2-1', 
+                                children: [
+                                    {
+                                         id: '2-1-1', 
+                                         label: '节点2-1-1', 
+                                    },
+                                    {
+                                         id: '2-1-2', 
+                                         label: '节点2-1-2', 
+                                    },
+                                    {
+                                         id: '2-1-3', 
+                                         label: '节点2-1-3', 
+                                    },
+                                    {
+                                         id: '2-1-4', 
+                                         label: '节点2-1-2', 
+                                    }
+                                ]
+                            },
+                            {
+                                id: '2-2', 
+                                label: '节点2-2', 
+                                children: [
+                                    {
+                                         id: '2-2-1', 
+                                         label: '节点2-2-1', 
+                                    },
+                                    {
+                                         id: '2-2-2', 
+                                         label: '节点2-2-2', 
+                                    },
+                                    {
+                                         id: '2-2-3', 
+                                         label: '节点2-2-3', 
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id: '3', 
+                        label: '节点3', 
+                        children: []
+                    },
+                    {
+                        id: '4', 
+                        label: '节点4', 
+                        children: [
+                            {
+                                    id: '4-1', 
+                                    label: '节点4-1', 
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        methods: {
+            message() {
+                this.$msg({
+                    type: 'success',
+                    message: '111'
+                }, (e) => {
+                    console.log(e)
+                })
+            },
+            checkAll() {
+                let data = this.$refs.zlTree.getHalfCheckNodes()
+                console.log(data)
+            },
+            nodeClick(data) {
+                console.log(data)
+            },
+            expandTree(isExpand) {//节点展开回调事件
+               console.log(isExpand)
+            }
+            
+        },
+    }         
+    </script>             
     
 可选属性：     
 nodeKey: string类型，关键字，与expandArray, checkedArray 配合使用进行默认展开与勾选，示例: id。   
@@ -78,16 +187,20 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
 
 ----树形表格插件      
 改插件依赖vue element-ui插件，应先引用element-ui再引用该插件，否则报错     
-<temp          
-    <tree-table :data="regionData" :columns="columns" border @cellClick="cellClick" @linkCellClick="linkCellClick" @editData="editData" @addChild="addChild" @removeData="removeData"/tree-table>    
-    github自动替换关键字，展示不全，请自行补充尖括号        
-/temp>
-    <script>        
- 
-    data() {          
-        return {        
-            columns: [      
-                    {      
+      <template>
+     <div>
+      <div>
+        <tree-table :data="regionData" :columns="columns" border @cellClick="cellClick" @linkCellClick="linkCellClick" @editData="editData" @addChild="addChild" @removeData="removeData"></tree-table>
+      </div>
+     </div>
+    </template>
+     <script>
+    export default {
+        name: 'treeTable',
+        data() {
+            return {
+                columns: [
+                    {
                         text: "区域名称",
                         value: "name",
                         width: 260,
@@ -107,15 +220,6 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
                         value: "remark",
                         rowClass: 'test'
                     },
-                     {
-                        text: "状态",
-                        value: "status",
-                        type: 'template',
-                        template: {
-                            '1': '正常',
-                            '0': '禁用'
-                        }
-                    },
                     {
                         text: "操作",
                         type: 'icon',
@@ -124,17 +228,19 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
                         width: 200,
                         cellClass: 'link-cell'
                     }
-                ],          
-                regionData: [       
-                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, status: '1' children: [
-                        {name: 'name2', code: '10002', remark: '备注2', status: '0'},
-                        {name: 'name3', code: '10003', remark: '备注3', status: '1'}
+                ],
+                regionData: [
+                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, children: [
+                        {name: 'name2', code: '10002', remark: '备注2'},
+                        {name: 'name3', code: '10003', remark: '备注3'}
                     ]}
-                ],       
-        },      
-        methods: {       
+                ],
+                
+            }
+        },
+        methods: {
             
-            linkCellClick() {        
+            linkCellClick() {
                 console.log(111)
             },
             removeData(data) {
@@ -149,7 +255,7 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
             cellClick(data) {
                 console.log(data)
             }
-        },        
-    }          
-</script>            
+        },
+    }
+    </script>     
     
