@@ -9,16 +9,17 @@ import zlUI from 'zengliang-ui'
 import Vue from 'vue'             
 Vue.use(zlUI)            
 
-2、具体页面进行调用            
+2、具体页面进行调用      
+--树形插件              
 <temp          
     <zl-tree :data="data"/zl-tree>    
     github自动替换关键字，展示不全，请自行补充尖括号        
-/temp>
-<script>   
- 
-    data() {  
-        return {  
-            data: [
+/temp>        
+<script>              
+       
+    data() {           
+        return {        
+            data: [            
                 {
                     id: '1',   
                     label: '节点1',   
@@ -57,10 +58,10 @@ Vue.use(zlUI)
                         }
                     ]
                 },
-            ]      
-        }     
-    }     
-</script>     
+            ]               
+        }             
+    }               
+</script>             
     
 可选属性：     
 nodeKey: string类型，关键字，与expandArray, checkedArray 配合使用进行默认展开与勾选，示例: id。   
@@ -73,3 +74,82 @@ showCheck: Boolean, 是否展示勾选框,默认true。
 getAllCheckNodes(): 返回所有勾选状态数据。  
 getHalfCheckNodes(): 返回所有半勾选状态数据。  
 
+
+
+----树形表格插件      
+改插件依赖vue element-ui插件，应先引用element-ui再引用该插件，否则报错     
+<temp          
+    <tree-table :data="regionData" :columns="columns" border @cellClick="cellClick" @linkCellClick="linkCellClick" @editData="editData" @addChild="addChild" @removeData="removeData"/tree-table>    
+    github自动替换关键字，展示不全，请自行补充尖括号        
+/temp>
+    <script>        
+ 
+    data() {          
+        return {        
+            columns: [      
+                    {      
+                        text: "区域名称",
+                        value: "name",
+                        width: 260,
+                        type: 'link',
+                        callback: 'linkCellClick',
+                        cellClass: 'link-cell'
+                    },
+                    {
+                        text: "区域编码",
+                        value: "code",
+                        width: 120,
+                        type: 'link',
+                        callback: 'cellClick'
+                    },
+                    {
+                        text: "备注",
+                        value: "remark",
+                        rowClass: 'test'
+                    },
+                     {
+                        text: "状态",
+                        value: "status",
+                        type: 'template',
+                        template: {
+                            '1': '正常',
+                            '0': '禁用'
+                        }
+                    },
+                    {
+                        text: "操作",
+                        type: 'icon',
+                        value: ['修改', '添加下级', '删除'],
+                        callback: ['editData', 'addChild', 'removeData'],
+                        width: 200,
+                        cellClass: 'link-cell'
+                    }
+                ],          
+                regionData: [       
+                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, status: '1' children: [
+                        {name: 'name2', code: '10002', remark: '备注2', status: '0'},
+                        {name: 'name3', code: '10003', remark: '备注3', status: '1'}
+                    ]}
+                ],       
+        },      
+        methods: {       
+            
+            linkCellClick() {        
+                console.log(111)
+            },
+            removeData(data) {
+                console.log(data,'remove')
+            },
+            addChild(data) {
+                console.log(data,'add')
+            },
+            editData(data) {
+                console.log(data,'edit')
+            },
+            cellClick(data) {
+                console.log(data)
+            }
+        },        
+    }          
+</script>            
+    
