@@ -7,7 +7,7 @@
 </template>
 <script>
     export default {
-        name: 'treeTable',
+        name: 'index',
         data() {
             return {
                 columns: [
@@ -32,6 +32,15 @@
                         rowClass: 'test'
                     },
                     {
+                        text: "状态",
+                        value: "status",
+                        type: 'template',
+                        template: {
+                            '0': '禁用',
+                            '1': '正常'
+                        }
+                    },
+                    {
                         text: "操作",
                         type: 'icon',
                         value: ['修改', '添加下级', '删除'],
@@ -41,9 +50,9 @@
                     }
                 ],
                 regionData: [
-                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, children: [
-                        {name: 'name2', code: '10002', remark: '备注2'},
-                        {name: 'name3', code: '10003', remark: '备注3'}
+                    {name: 'name1', code: '10001', remark: '备注1', status: '1', _expanded: true, children: [
+                        {name: 'name2', code: '10002', remark: '备注2', status: '1',},
+                        {name: 'name3', code: '10003', remark: '备注3', status: '0'}
                     ]}
                 ],
                 

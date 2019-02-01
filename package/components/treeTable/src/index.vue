@@ -112,7 +112,7 @@ export default {
       if (column.rowClass) {
          arr.push(column.rowClass)
       }
-      return arr
+      return arr.join(' ')
     }
   }
 };
