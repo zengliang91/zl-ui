@@ -226,6 +226,15 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
                         value: "remark",
                         rowClass: 'test'
                     },
+                     {
+                        text: "状态",
+                        type: 'template',
+                        value: "status",
+                        template: {
+                           '0': '正常',
+                           '1': '禁用'
+                        }
+                    },
                     {
                         text: "操作",
                         type: 'icon',
@@ -236,9 +245,9 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
                     }
                 ],
                 regionData: [
-                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, children: [
-                        {name: 'name2', code: '10002', remark: '备注2'},
-                        {name: 'name3', code: '10003', remark: '备注3'}
+                    {name: 'name1', code: '10001', remark: '备注1', _expanded: true, status: '1', children: [
+                        {name: 'name2', code: '10002', remark: '备注2', status: '1'},
+                        {name: 'name3', code: '10003', remark: '备注3', status: '0'}
                     ]}
                 ],
                 
@@ -263,5 +272,25 @@ getHalfCheckNodes(): 返回所有半勾选状态数据。
             }
         },
     }
-    </script>     
+    </script>    
     
+可选属性：    
+data： 数组，表格数据   
+columns： 数组， 表头配置，详情见下  
+     
+data属性：         
+_expanded： Boolean类型，是否展开子级， 默认为false       
+     
+columns属性：      
+text： string类型，表头名称       
+value: string类型、数组， 该列对应数据key值  
+width: Number， 该列宽度，可以不指定，      
+callback: string类型、数组， 单元格或者元素点击回调函数名       
+cellClass: string类型， 指定该列单元格样式      
+rowClass： string类型， 指定该列表头样式       
+template:  object类型，指定该列数据转译枚举       
+type: string类型， 该列类型， 默认值为空，可选属性link, template, icon     
+    -- link: 该列单元格添加点击事件，通过callback指定回调方法名       
+    -- template: 该列数据通过template对象进行数据转译      
+    -- icon： 该列内容为按钮，通过value传入数组指定按钮名称，callback数组指定分别对应回调方法名    
+       
